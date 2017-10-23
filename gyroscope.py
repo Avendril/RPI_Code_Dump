@@ -2,6 +2,10 @@ from mpu6050 import mpu6050
 from time import sleep
 import paho.mqtt.publish as publish
 
+def publish_data(queue,message):
+        publish.single(str(queue), str(message), hostname="10.37.28.64")
+
+
 sensor = mpu6050(0x68)
 print " waiting for the sensor to callibrate..."
 sleep(2)
@@ -31,5 +35,3 @@ while True:
 
 	publish_data("Temperature","Temp: " +str(temp)+ "C")
 
-def publish_data(queue,message):
-	publish.single(str(queue), str(message), hostname="10.37.28.64")
