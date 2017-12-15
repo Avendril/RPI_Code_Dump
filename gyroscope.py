@@ -1,37 +1,65 @@
 from mpu6050 import mpu6050
-from time import sleep
-import paho.mqtt.publish as publish
-
-def publish_data(queue,message):
-        publish.single(str(queue), str(message), hostname="10.37.28.64")
-
+import time
 
 sensor = mpu6050(0x68)
-print " waiting for the sensor to callibrate..."
-sleep(2)
-while True:
-	accel_data = sensor.get_accel_data()
-	gyro_data = sensor.get_gyro_data()
-	temp = sensor.get_temp()
-	print("Accelerometer Data")
-	print("x: " +str(accel_data['x']))
-	print("y: " +str(accel_data['y']))
-	print("z: " +str(accel_data['z']))
 
-	publish_data("Accelerometer","x: " +str(accel_data['x']))
-	publish_data("Accelerometer","y: " +str(accel_data['y']))
-	publish_data("Accelerometer","z: " +str(accel_data['z']))
-	
-	print("Gyroscope data")
-	print("x: " + str(gyro_data['x']))
-	print("y: " + str(gyro_data['y']))
-	print("z: " + str(gyro_data['z']))
-	print("Temp: " + str(temp) + " C")
-	sleep(2)
+#Accelerometer Readings functions
+def Accelerometer_Read_X():
+	while True:
+		accel_data = sensor.get_accel_data()
+		x = str(accel_data['x'])
+		
+#		time.sleep(1)
+		return x	
 
-	publish_data("Gyroscope","x: " +str(gyro_data['x']))
-	publish_data("Gyroscope","y: " +str(gyro_data['y']))
-	publish_data("Gyroscope","z: " +str(gyro_data['z']))
+def Accelerometer_Read_Y():
+        while True:
+                accel_data = sensor.get_accel_data()
+                y = str(accel_data['y'])
+                
+#		time.sleep(1)
+		return y   
 
-	publish_data("Temperature","Temp: " +str(temp)+ "C")
+def Accelerometer_Read_Z():
+        while True:
+                accel_data = sensor.get_accel_data()
+                z = str(accel_data['z'])
 
+#		time.sleep(1)
+                return z   
+
+
+#Gyroscope Readings functions
+def Gyroscope_Read_X():
+	while True:
+		gyro_data = sensor.get_gyro_data()
+        	a = str(gyro_data['x'])
+        	
+#		time.sleep(1)
+		return a
+
+def Gyroscope_Read_Y():
+        while True:
+                gyro_data = sensor.get_gyro_data()
+                b = str(gyro_data['y'])
+
+ #               time.sleep(1)
+                return b
+
+
+def Gyroscope_Read_Z():
+        while True:
+                gyro_data = sensor.get_gyro_data()
+                c = str(gyro_data['z'])
+
+#                time.sleep(1)
+                return c
+
+
+#Temperature Readings functions
+def Temperature_Read_MPU():
+	while True:
+		temp =str(sensor.get_temp())
+
+#		time.sleep(1)
+		return temp
