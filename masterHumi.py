@@ -8,12 +8,15 @@ import testDB as database
 hostname = "87.44.19.170"#Ubuntu VM: 87.44.19.170  Local Machine(bchmielewski laptop):10.37.28.64
 humidityQueue = "SmartHive/Humidity"
 
-try:
-        print("Starting mqtt publishing")
+print("Started sending data to mqtt publisher")
 
-        while True:
-                os.system("mosquitto_pub -h " + hostname + " -t " + humidityQueue + " -m " + humi.Read_Humidity())
-                database.upload_to_db('humidity', humi.Read_Humidity())
+while True:
+	try:
+        
+	        while True:
+	                os.system("mosquitto_pub -h " + hostname + " -t " + humidityQueue + " -m " + humi.Read_Humidity())
+	                database.upload_to_db('humidity', humi.Read_Humidity())
 
-except Exception as e:
-        pass
+	except:
+		print("ERROR")
+		pass
