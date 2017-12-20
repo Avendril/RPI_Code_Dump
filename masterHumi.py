@@ -15,5 +15,5 @@ try:
                 os.system("mosquitto_pub -h " + hostname + " -t " + humidityQueue + " -m " + humi.Read_Humidity())
                 database.upload_to_db('humidity', humi.Read_Humidity())
 
-except KeyboardInterrupt:
-        print("Loop was stopped manually")
+except Exception as e:
+        pass

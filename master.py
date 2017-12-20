@@ -21,7 +21,7 @@ try:
 		os.system("mosquitto_pub -h " + hostname + " -t " + temperatureQueue2 + " -m " + temperature.Read_Temp2() )
 		database.upload_to_db('temperature2', temperature.Read_Temp2())
 
-		time.sleep(0.1)
+		time.sleep(5)
 
-except KeyboardInterrupt:
-	print("Loop was stopped manually")
+except Exception as e:
+	pass
